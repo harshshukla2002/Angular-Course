@@ -1,0 +1,42 @@
+<p>Server {{ serverId }} is {{ serverStatus }}</p>
+<p>
+  Server {{ serverId }} is {{ getServerStatus() }} and this is getting by method
+</p>
+
+<input class="form-control my-3" (input)="onChangeServerName($event)" />
+<button
+  [disabled]="allowDisabled"
+  (click)="onCreateServer()"
+  class="btn btn-primary"
+>
+  Create Server
+</button>
+<p *ngIf="serverCreated; else noServer">{{ serverText }}</p>
+<ng-template #noServer>
+  <p>No Server is runnig</p>
+</ng-template>
+
+<label>Name:</label>
+<input
+  type="text"
+  class="form-control"
+  [value]="username"
+  (input)="onChangeUserName($event)"
+/>
+<p>Name is {{ username }}</p>
+<button
+  class="btn btn-secondary"
+  (click)="onClickResetButton()"
+  [disabled]="resetButtonDisabled"
+>
+  Reset
+</button>
+
+<p [ngStyle]="{ color: getRandomColor() }" class="my-2 fs-4">
+  This is text based on value: {{ randomNumber.toFixed(1) }} and changes color
+</p>
+
+<button class="btn btn-secondary my-3" (click)="incrementCount()">
+  Increment Count
+</button>
+<p *ngFor="let number of countArray">{{ number }}</p>
