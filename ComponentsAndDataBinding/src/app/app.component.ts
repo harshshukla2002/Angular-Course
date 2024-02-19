@@ -1,36 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent {
-  serverName: string = '';
-  serverContent: string = '';
-  serverElements = [];
+export class AppComponent implements OnInit {
+  serverElements = [
+    { type: 'server', name: 'test server', content: 'this is test server' },
+  ];
 
-  onServerNameChange(event: Event) {
-    this.serverName = (<HTMLInputElement>event.target).value;
-  }
+  constructor() {}
 
-  onServerContentChange(event: Event) {
-    this.serverContent = (<HTMLInputElement>event.target).value;
-  }
+  ngOnInit(): void {}
 
-  onAddServer() {
+  onAddServer(serverData: { serverName: string; serverContent: string }) {
     this.serverElements.push({
       type: 'server',
-      name: this.serverName,
-      content: this.serverContent,
+      name: serverData.serverName,
+      content: serverData.serverContent,
     });
   }
 
-  onAddBluePrint() {
+  onAddBluePrint(blueprintData: { serverName: string; serverContent: string }) {
     this.serverElements.push({
       type: 'blueprint',
-      name: this.serverName,
-      content: this.serverContent,
+      name: blueprintData.serverName,
+      content: blueprintData.serverContent,
     });
   }
 }

@@ -1,46 +1,15 @@
 <div class="container m-5">
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="col-sm-5">
-        <label>Server Name</label>
-        <input
-          class="form-control"
-          type="text"
-          (input)="onServerNameChange($event)"
-        />
-      </div>
-      <div class="col-sm-5">
-        <label>Server Content</label>
-        <input
-          class="form-control"
-          type="text"
-          (input)="onServerContentChange($event)"
-        />
-      </div>
-      <div class="col-xs-12 m-2">
-        <button class="btn btn-success mx-2" (click)="onAddServer()">
-          Add Server
-        </button>
-        <button class="btn btn-primary" (click)="onAddBluePrint()">
-          Add Blueprint
-        </button>
-      </div>
-    </div>
-  </div>
+  <app-cockpit
+    (serverCreated)="onAddServer($event)"
+    (blueprintCreated)="onAddBluePrint($event)"
+  ></app-cockpit>
   <hr />
   <div class="row">
     <div class="col-xs-12">
-      <div *ngFor="let element of serverElements">
-        <div>{{ element.name }}</div>
-        <div>
-          <p>
-            <strong *ngIf="element.type === 'server'">{{
-              element.content
-            }}</strong>
-            <em *ngIf="element.type === 'blueprint'">{{ element.content }}</em>
-          </p>
-        </div>
-      </div>
+      <app-server-element
+        *ngFor="let serverElement of serverElements"
+        [element]="serverElement"
+      ></app-server-element>
     </div>
   </div>
 </div>
