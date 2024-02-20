@@ -1,5 +1,7 @@
-<app-header></app-header>
+<app-header (location)="onNavigate($event)"></app-header>
 <div class="row mx-5 my-3">
-  <app-recipes></app-recipes>
-  <app-shopping-list></app-shopping-list>
+  <app-recipes *ngIf="currentLocation === 'recipe'"></app-recipes>
+  <app-shopping-list
+    *ngIf="currentLocation === 'shopping-list'"
+  ></app-shopping-list>
 </div>

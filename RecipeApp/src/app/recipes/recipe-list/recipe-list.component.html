@@ -4,20 +4,12 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-xs-12" *ngFor="let recipe of recipes">
-    <div class="card mb-4" style="width: 18rem">
-      <img
-        src="{{ recipe.imageUrl }}"
-        class="card-img-top img-fluid"
-        alt="..."
-      />
-      <div class="card-body">
-        <h5 class="card-title">{{ recipe.name }}</h5>
-        <p class="card-text">
-          {{ recipe.description }}
-        </p>
-      </div>
-    </div>
+  <div class="col-xs-12">
+    <app-recipe-item
+      *ngFor="let recipe of recipes"
+      [recipe]="recipe"
+      class="list-group"
+      (selectedRecipe)="OnSelect(recipe)"
+    ></app-recipe-item>
   </div>
-  <app-recipe-item></app-recipe-item>
 </div>
