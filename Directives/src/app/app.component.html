@@ -13,16 +13,25 @@
       </div>
       <br />
       <br />
-      <div *ngIf="onlyOdd">
+      <!-- <div *ngIf="onlyOdd">
         <ul class="list-group" *ngFor="let evenNumber of evenNumbers">
           <li class="list-group-item">{{ evenNumber }}</li>
         </ul>
-      </div>
-      <div *ngIf="!onlyOdd">
-        <ul class="list-group" *ngFor="let oddNumber of oddNumbers">
-          <li class="list-group-item">{{ oddNumber }}</li>
-        </ul>
-      </div>
+      </div> -->
+      <ul class="list-group">
+        <div *ngIf="onlyOdd">
+          <li class="list-group-item" *ngFor="let oddNumber of oddNumbers">
+            {{ oddNumber }}
+          </li>
+        </div>
+        <div *appCheck="onlyOdd">
+          <li class="list-group-item" *ngFor="let evenNumber of evenNumbers">
+            {{ evenNumber }}
+          </li>
+        </div>
+      </ul>
+      <p appBasicHighlight>This is text styled with basic directive</p>
+      <p appBetterHighlight>This is text styled with better directive</p>
     </div>
   </div>
 </div>

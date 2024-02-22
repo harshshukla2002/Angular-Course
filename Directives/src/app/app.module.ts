@@ -3,16 +3,19 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { basicHighlightDirective } from './basic-hightlight/basic-highligh.directive';
+import { BetterHighlightDirective } from './better-directive/better-highlight.directive';
+import { CheckDirective } from './check.directive';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    basicHighlightDirective,
+    BetterHighlightDirective,
+    CheckDirective,
   ],
-  imports: [
-    BrowserModule,
-    NgbModule
-  ],
+  imports: [BrowserModule, NgbModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
