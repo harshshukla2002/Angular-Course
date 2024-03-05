@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Recipes } from '../recipe.model';
-import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { RecipeService } from '../recipe.service';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -9,13 +9,22 @@ import { RecipeService } from '../recipe.service';
   styleUrl: './recipe-detail.component.css',
 })
 export class RecipeDetailComponent implements OnInit {
-  @Input() recipe: Recipes;
+  recipe: Recipes;
+  index: number;
 
-  constructor(private recipeService: RecipeService) {}
+  constructor(
+    private recipeService: RecipeService,
+    private route: ActivatedRoute
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.route.params.subscribe((params: Params) => {
+      this.index = params['index'];
+      this.recipe = this.recipeService.getRecipeWithIndex(+this.index);
+    });
+  }
 
   onAddToShoppingList() {
-    this.recipeService.addIngredientToShoppingList(this.recipe.ingredients)
+    this.recipeService.addIngredientToShoppingList(this.recipe.ingredients);
   }
 }

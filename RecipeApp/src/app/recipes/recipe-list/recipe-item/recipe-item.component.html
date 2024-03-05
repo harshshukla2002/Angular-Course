@@ -1,7 +1,8 @@
 <div
   class="list-group-item clearfix"
   style="width: 300px; margin: 10px"
-  (click)="onRecipeSelect()"
+  [routerLink]="[index]"
+  routerLinkActive="active"
 >
   <div class="pull-left">
     <h3>{{ recipe.name }}</h3>
