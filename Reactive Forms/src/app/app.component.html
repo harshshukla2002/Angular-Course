@@ -1,29 +1,62 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-      <form>
+      <form [formGroup]="signup">
         <div class="form-group">
           <label for="username">Username</label>
           <input
             type="text"
             id="username"
-            class="form-control">
+            class="form-control"
+            formControlName="username"
+          />
+          <span
+            class="help-block"
+            *ngIf="
+              !signup.get('username').valid && signup.get('username').touched
+            "
+            >Please enter a valid username!
+          </span>
         </div>
         <div class="form-group">
           <label for="email">email</label>
           <input
             type="text"
             id="email"
-            class="form-control">
+            class="form-control"
+            formControlName="email"
+          />
+          <span
+            class="help-block"
+            *ngIf="!signup.get('email').valid && signup.get('email').touched"
+            >Please enter a valid email!
+          </span>
         </div>
         <div class="radio" *ngFor="let gender of genders">
           <label>
-            <input
-              type="radio"
-              [value]="gender">{{ gender }}
+            <input type="radio" [value]="gender" formControlName="gender" />
+            {{ gender }}
           </label>
         </div>
-        <button class="btn btn-primary" type="submit">Submit</button>
+        <div formArrayName="hobbies">
+          <h4>Your Hobbies</h4>
+          <button
+            class="btn btn-secondary"
+            (click)="addHobbies()"
+            style="margin-block: 10px"
+          >
+            Add Hobbies
+          </button>
+          <div
+            class="form-group"
+            *ngFor="let hobbiesControl of getControls(); let i = index"
+          >
+            <input type="text" class="form-control" [formControlName]="i" />
+          </div>
+        </div>
+        <button class="btn btn-primary" type="submit" (click)="onSubmit()">
+          Submit
+        </button>
       </form>
     </div>
   </div>
