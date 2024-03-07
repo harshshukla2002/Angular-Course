@@ -1,1 +1,74 @@
-<p>recipe-edit works!</p>
+<div class="row">
+  <div class="col-xs-12">
+    <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+      <div class="row" style="margin-block: 10px">
+        <div class="col-xs-12">
+          <button class="btn btn-primary" style="margin-inline: 10px">
+            Save
+          </button>
+          <button class="btn btn-danger">Cancel</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              id="name"
+              class="form-control"
+              formControlName="recipeName"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="imageUrl">Image Url</label>
+            <input
+              type="text"
+              id="imageUrl"
+              class="form-control"
+              formControlName="recipeImageUrl"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <img src="" class="img-responsive" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="descriptiom">Description</label>
+            <textarea
+              type="text"
+              id="descriptiom"
+              class="form-control"
+              rows="6"
+              formControlName="recipeDescription"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="row">
+            <div class="col-xs-6">
+              <input type="text" class="form-control" />
+            </div>
+            <div class="col-xs-3">
+              <input type="number" class="form-control" />
+            </div>
+            <div class="col-xs-2">
+              <button class="btn btn-danger">X</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

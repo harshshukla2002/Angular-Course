@@ -10,7 +10,7 @@ import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.com
 import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
 import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-item.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DropdownDirective } from './Shared/dropdown.directive';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { AppRouteModule } from './app-route.module';
@@ -31,7 +31,13 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
     PageNotFoundComponent,
     RecipeEditComponent,
   ],
-  imports: [BrowserModule, FormsModule, NgbDropdownModule, AppRouteModule],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    NgbDropdownModule,
+    AppRouteModule,
+    ReactiveFormsModule,
+  ],
   providers: [ShoppingListService],
   bootstrap: [AppComponent],
 })
