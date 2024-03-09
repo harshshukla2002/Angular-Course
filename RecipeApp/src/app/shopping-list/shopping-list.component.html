@@ -9,7 +9,9 @@
         (click)="onEdit(i)"
         style="cursor: pointer"
       >
-        {{ ingredient.name }} ({{ ingredient.amount }})
+        {{ ingredient.recipeIngredientName }} ({{
+          ingredient.recipeIngredientAmount
+        }})
       </a>
     </ul>
   </div>
