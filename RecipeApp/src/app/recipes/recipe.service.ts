@@ -3,30 +3,30 @@ import { Recipes } from './recipe.model';
 import { Ingredient } from '../Shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { Subject } from 'rxjs';
+import { ApisService } from '../Shared/apis.service';
 
 @Injectable()
 export class RecipeService {
   recipeChanged = new Subject<Recipes[]>();
+  postRecipeSub = new Subject<boolean>();
+  private postRecipe: boolean = false;
+  private recipes: Recipes[] = [];
 
-  private recipes: Recipes[] = [
-    new Recipes(
-      'Pasta',
-      'White Sause Pasta',
-      'https://www.cheflingmeals.com/wp-content/uploads/2021/02/white-sauce-pasta-Autosaved-1536x1024.jpg',
-      [new Ingredient('Pasta', 20), new Ingredient('Maida', 15)]
-    ),
-    new Recipes(
-      'Paneer',
-      'Kadhai Paneer',
-      'https://i.redd.it/54c1clhx3uh11.jpg',
-      [new Ingredient('Paneer', 70), new Ingredient('Masala', 10)]
-    ),
-  ];
-
-  constructor(private shoppingListService: ShoppingListService) {}
+  constructor(
+    private shoppingListService: ShoppingListService,
+    private apisService: ApisService
+  ) {}
 
   getRecipes() {
-    return this.recipes.slice();
+    if (this.recipes.length === 0 || this.postRecipe)
+      this.apisService.fetchRecipes().subscribe((recipesData) => {
+        this.recipes = recipesData;
+        this.recipeChanged.next(this.recipes.slice());
+        this.postRecipe = false;
+        this.postRecipeSub.next(this.postRecipe);
+      });
+
+    return this.recipes?.slice();
   }
 
   addIngredientToShoppingList(ingredients: Ingredient[]) {
@@ -38,8 +38,12 @@ export class RecipeService {
   }
 
   onAddRecipe(newRecipe: Recipes) {
-    this.recipes.push(newRecipe);
-    this.recipeChanged.next(this.recipes.slice());
+    newRecipe = { ...newRecipe, id: Date.now() };
+    this.apisService.postRecipes(newRecipe).subscribe((response) => {
+      this.postRecipe = true;
+      this.postRecipeSub.next(this.postRecipe);
+      this.getRecipes();
+    });
   }
 
   onUpdateRecipe(newRecipe: Recipes, index: number) {

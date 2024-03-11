@@ -5,6 +5,7 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
+import { RecipeAuth } from './recipes/recipe-auth.service';
 
 const appRoutes: Routes = [
   {
@@ -17,8 +18,16 @@ const appRoutes: Routes = [
     component: RecipesComponent,
     children: [
       { path: 'new', component: RecipeEditComponent },
-      { path: ':index', component: RecipeDetailComponent },
-      { path: ':index/edit', component: RecipeEditComponent },
+      {
+        path: ':index',
+        component: RecipeDetailComponent,
+        canActivate: [RecipeAuth],
+      },
+      {
+        path: ':index/edit',
+        component: RecipeEditComponent,
+        canActivate: [RecipeAuth],
+      },
     ],
   },
   {

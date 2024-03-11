@@ -1,8 +1,8 @@
 <div class="row">
   <div class="col-xs-12">
     <img
-      src="{{ recipe.imageUrl }}"
-      alt="{{ recipe.name }}"
+      src="{{ recipe?.imageUrl }}"
+      alt="{{ recipe?.name }}"
       class="img-fluid"
       style="max-height: 250px"
     />
@@ -10,7 +10,7 @@
 </div>
 <div class="row">
   <div class="col-xs-12">
-    <h1>{{ recipe.name }}</h1>
+    <h1>{{ recipe?.name }}</h1>
   </div>
 </div>
 <div class="row">
@@ -33,15 +33,18 @@
 </div>
 <div class="row">
   <div class="col-xs-12">
-    <p>{{ recipe.description }}</p>
+    <p>{{ recipe?.description }}</p>
   </div>
 </div>
 <div class="row">
   <div class="col-xs-12">
     <ul class="list-group">
-      <li class="list-group-item" *ngFor="let ingredient of recipe.ingredients">
-        {{ ingredient.recipeIngredientName }} -
-        {{ ingredient.recipeIngredientAmount }}
+      <li
+        class="list-group-item"
+        *ngFor="let ingredient of recipe?.ingredients"
+      >
+        {{ ingredient?.recipeIngredientName }} -
+        {{ ingredient?.recipeIngredientAmount }}
       </li>
     </ul>
   </div>
