@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ComponentFactoryResolver, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
+import { AlertComponent } from '../Shared/alert/alert.component';
+import { PlaceholderDirective } from '../Shared/PlaceHolder/placeholder.directive';
 
 @Component({
   selector: 'app-auth',
@@ -16,8 +18,14 @@ export class AuthComponent {
   });
   isLoading: boolean = false;
   isError: string = null;
+  @ViewChild(PlaceholderDirective, { static: false })
+  alertHost: PlaceholderDirective;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private componentFactoryResolver: ComponentFactoryResolver
+  ) {}
 
   onSwitch() {
     this.loginMode = !this.loginMode;
@@ -38,6 +46,7 @@ export class AuthComponent {
           (errorMessage) => {
             this.isLoading = false;
             this.isError = errorMessage;
+            this.showAlert(errorMessage);
           }
         );
     } else {
@@ -52,8 +61,30 @@ export class AuthComponent {
           (errorMessage) => {
             this.isLoading = false;
             this.isError = errorMessage;
+            this.showAlert(errorMessage);
           }
         );
     }
+  }
+
+  onClickClose() {
+    this.isError = null;
+  }
+
+  private showAlert(message: string) {
+    const alertComponentFactory =
+      this.componentFactoryResolver.resolveComponentFactory(AlertComponent);
+
+    const hostViewContainerRef = this.alertHost.viewContainerRef;
+    hostViewContainerRef.clear();
+
+    const componentRef = hostViewContainerRef.createComponent(
+      alertComponentFactory
+    );
+
+    componentRef.instance.message = message;
+    componentRef.instance.closeModal.subscribe(() => {
+      hostViewContainerRef.clear();
+    });
   }
 }
