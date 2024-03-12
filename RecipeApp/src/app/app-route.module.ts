@@ -6,6 +6,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { RecipeAuth } from './recipes/recipe-auth.service';
+import { AuthComponent } from './auth/auth.component';
+import { AuthGuard } from './auth/auth-guard.service';
 
 const appRoutes: Routes = [
   {
@@ -16,6 +18,7 @@ const appRoutes: Routes = [
   {
     path: 'recipe',
     component: RecipesComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: 'new', component: RecipeEditComponent },
       {
@@ -33,6 +36,11 @@ const appRoutes: Routes = [
   {
     path: 'shopping-list',
     component: ShoppingListComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'auth',
+    component: AuthComponent,
   },
   {
     path: '**',

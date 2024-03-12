@@ -5,7 +5,7 @@ export class Recipes {
   public description: string = '';
   public imageUrl: string = '';
   public ingredients: Ingredient[];
-  public id?: number;
+  public id?: string;
 
   constructor(
     name: string,

@@ -1,13 +1,14 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { exhaustMap, map, take } from 'rxjs/operators';
 import { Recipes } from '../recipes/recipe.model';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApisService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   postRecipes(postRecipe: Recipes) {
     return this.http.post(
@@ -26,9 +27,8 @@ export class ApisService {
           const recipeArray: Recipes[] = [];
 
           for (let key in responseData) {
-            console.log(key);
             if (responseData.hasOwnProperty(key))
-              recipeArray.push({ ...responseData[key] });
+              recipeArray.push({ ...responseData[key], id: key });
           }
           return recipeArray;
         })

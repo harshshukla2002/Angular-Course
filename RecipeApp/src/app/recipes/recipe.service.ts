@@ -38,7 +38,6 @@ export class RecipeService {
   }
 
   onAddRecipe(newRecipe: Recipes) {
-    newRecipe = { ...newRecipe, id: Date.now() };
     this.apisService.postRecipes(newRecipe).subscribe((response) => {
       this.postRecipe = true;
       this.postRecipeSub.next(this.postRecipe);
