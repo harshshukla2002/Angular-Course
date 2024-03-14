@@ -13,3 +13,4 @@
 - Forms - Template Driven and Reactives Form
 - Pipes
 - Http
+- Standalone
