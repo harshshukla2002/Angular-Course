@@ -14,3 +14,4 @@
 - Pipes
 - Http
 - Standalone
+- Signals
