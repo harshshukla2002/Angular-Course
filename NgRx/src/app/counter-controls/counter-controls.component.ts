@@ -15,6 +15,6 @@ export class CounterControlsComponent {
   }
 
   decrement() {
-    this.store.dispatch(decrement());
+    this.store.dispatch(decrement({ value: 1 }));
   }
 }
