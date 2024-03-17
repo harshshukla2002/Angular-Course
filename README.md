@@ -15,3 +15,8 @@
 - Http
 - Standalone
 - Signals
+- Animations
+- Service Workers
+- Angular Universal
+
+## this course is completed.
