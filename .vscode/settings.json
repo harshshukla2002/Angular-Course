@@ -1,4 +1,5 @@
 {
     "angular.enable-strict-mode-prompt": false,
-    "git.ignoreLimitWarning": true
+    "git.ignoreLimitWarning": true,
+    "workbench.iconTheme": "keen-neutral-icon-theme"
 }
